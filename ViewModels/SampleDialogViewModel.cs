@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Batsy.ViewModels
 {
-    class SampleDialogViewModel : ViewModelBase
+    class SampleDialogViewModel : ObservableObject
     {
         private string? _name;
 

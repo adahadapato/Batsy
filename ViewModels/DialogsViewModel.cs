@@ -11,7 +11,7 @@ using System.Windows.Input;
 
 namespace Batsy.ViewModels
 {
-    class DialogsViewModel : ViewModelBase
+    class DialogsViewModel : ObservableObject
     {
         public DialogsViewModel()
         {

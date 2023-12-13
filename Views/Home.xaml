@@ -5,280 +5,88 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:Batsy.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBlock.xaml" />
-                <!-- throw in some extra colour for our floating action button -->
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/MaterialDesignColor.Green.Named.Primary.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </UserControl.Resources>
-
+             Background="Transparent" 
+             Height="500" 
+             Width="800">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="1.5*" />
+        </Grid.ColumnDefinitions>
 
-        <Grid Margin="16"
-          HorizontalAlignment="Center"
-          VerticalAlignment="Top">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+        <Image Source="/Images/close.png" 
+                Grid.Column="1" 
+                Panel.ZIndex="1" 
+                Style="{StaticResource imgClose}"/>
 
-            <!--<Image Width="100"
-             Height="100"
-             --><!--Source="Resources/ms-icon-310x310.png"--><!--
-             Stretch="Uniform" />-->
+        <Border CornerRadius="10 0 0 10">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#623ed0" Offset="0" />
+                    <GradientStop Color="#3AADA1" Offset="1" />
+                </LinearGradientBrush>
+            </Border.Background>
 
-            <StackPanel Grid.Column="1"
-                  Margin="24,0,0,0"
-                  VerticalAlignment="Center">
-                <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}"
-                   Text="Welcome to Material Design In XAML Toolkit"
-                   TextWrapping="Wrap" />
-
-                <Button Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
-                CommandParameter="{x:Static Dock.Left}"
-                Style="{StaticResource MaterialDesignFlatButton}">
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="Binoculars" />
-                        <TextBlock Margin="8,0,0,0" Text="EXPLORE" />
-                    </StackPanel>
-                </Button>
-            </StackPanel>
-        </Grid>
-
-        <ScrollViewer Grid.Row="1"
-                  Margin="0,0,0,32"
-                  HorizontalAlignment="Center"
-                  VerticalAlignment="Bottom"
-                  HorizontalScrollBarVisibility="Auto"
-                  VerticalScrollBarVisibility="Disabled">
             <Grid>
-                <StackPanel Orientation="Horizontal">
-                    <materialDesign:Card Width="420"
-                               Height="270"
-                               Margin="4,2,8,16">
-                        <Grid VerticalAlignment="Stretch">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
+                <Canvas>
+                    <Polygon Points="0,20 230,140 0,270" Fill="#4EB1B6" />
+                    <Polygon Points="100,400 200,370 180,470" Fill="#4EB1B6" />
+                    <Ellipse Margin="250 450 0 0" Width="40" Height="40" Fill="#4EB1B6" />
+                    <Ellipse Margin="50 400 0 0" Width="20" Height="20" Fill="#4EB1B6" />
+                </Canvas>
 
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="200" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-
-                            <Image Grid.RowSpan="5"
-                     VerticalAlignment="Stretch"
-                     Source="Resources/Contact.png"
-                     Stretch="UniformToFill"
-                     StretchDirection="Both" />
-
-                            <TextBlock Grid.Column="1"
-                         Margin="16,16,16,2"
-                         Style="{StaticResource MaterialDesignHeadline5TextBlock}"
-                         Text="Get In Touch" />
-
-                            <TextBlock Grid.Row="1"
-                         Grid.Column="1"
-                         Margin="16,0,16,8"
-                         VerticalAlignment="Center"
-                         Foreground="{DynamicResource MaterialDesignBodyLight}"
-                         Text="Say hello, make a feature request, or raise a bug through one of these channels:"
-                         TextWrapping="Wrap" />
-
-                            <Border Grid.Row="2"
-                      Grid.Column="1"
-                      Margin="0,8,0,0"
-                      BorderBrush="{DynamicResource MaterialDesignDivider}"
-                      BorderThickness="0,1,0,0">
-                                <Grid Margin="8">
-                                    <Button x:Name="GitHubButton"
-                          HorizontalAlignment="Left"
-                         
-                          Style="{StaticResource MaterialDesignFlatButton}">
-                                        <StackPanel Orientation="Horizontal">
-                                            <materialDesign:PackIcon Kind="Github" />
-                                            <TextBlock Margin="8,0,0,0"
-                                 VerticalAlignment="Center"
-                                 Text="GitHub" />
-                                        </StackPanel>
-                                    </Button>
-
-                                    <Button x:Name="TwitterButton"
-                          HorizontalAlignment="Right"
-                          
-                          Style="{StaticResource MaterialDesignFlatButton}">
-                                        <StackPanel Orientation="Horizontal">
-                                            <materialDesign:PackIcon Kind="Twitter" />
-                                            <TextBlock Margin="8,0,0,0"
-                                 VerticalAlignment="Center"
-                                 Text="Twitter" />
-                                        </StackPanel>
-                                    </Button>
-                                </Grid>
-                            </Border>
-
-                            <Border Grid.Row="3"
-                      Grid.Column="1"
-                      BorderBrush="{DynamicResource MaterialDesignDivider}"
-                      BorderThickness="0,1,0,0">
-                                <Grid Margin="8">
-                                    <Button x:Name="ChatButton"
-                          HorizontalAlignment="Left"
-                          
-                          Style="{StaticResource MaterialDesignFlatButton}">
-                                        <StackPanel Orientation="Horizontal">
-                                            <materialDesign:PackIcon Kind="Message" />
-                                            <TextBlock Margin="8,0,0,0"
-                                 VerticalAlignment="Center"
-                                 Text="Chat" />
-                                        </StackPanel>
-                                    </Button>
-
-                                    <Button x:Name="EmailButton"
-                          HorizontalAlignment="Right"
-                          
-                          Style="{StaticResource MaterialDesignFlatButton}">
-                                        <StackPanel Orientation="Horizontal">
-                                            <materialDesign:PackIcon Kind="Email" />
-                                            <TextBlock Margin="8,0,0,0"
-                                 VerticalAlignment="Center"
-                                 Text="Email" />
-                                        </StackPanel>
-                                    </Button>
-                                </Grid>
-                            </Border>
-                        </Grid>
-                    </materialDesign:Card>
-
-                    <materialDesign:Card Width="420"
-                               Height="270"
-                               Margin="8,2,4,16">
-                        <Grid VerticalAlignment="Stretch">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="200" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-
-                            <materialDesign:PackIcon Width="160"
-                                       Height="160"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       Kind="Github" />
-
-                            <StackPanel Grid.Column="1">
-                                <TextBlock Margin="16,16,16,8"
-                           Style="{StaticResource MaterialDesignHeadline5TextBlock}"
-                           Text="Open Source" />
-
-                                <TextBlock Margin="16,0,16,8"
-                           VerticalAlignment="Top"
-                           Foreground="{DynamicResource MaterialDesignBodyLight}"
-                           Text="This project is completely open source. If you like it and want to say thanks you could hit the GitHub Star button, tweet or post about it, or tell your mum about it!"
-                           TextWrapping="Wrap" />
-                            </StackPanel>
-
-                            <Border Grid.Row="1"
-                      Grid.ColumnSpan="2"
-                      Padding="8"
-                      BorderBrush="{DynamicResource MaterialDesignDivider}"
-                      BorderThickness="0,1,0,0">
-                                <DockPanel>
-                                    <Button x:Name="DonateButton"
-                          
-                          DockPanel.Dock="Right"
-                          Style="{StaticResource MaterialDesignFlatButton}">
-                                        <StackPanel Orientation="Horizontal">
-                                            <materialDesign:PackIcon Kind="Gift" />
-                                            <TextBlock Margin="8,0,0,0"
-                                 VerticalAlignment="Center"
-                                 Text="Donate" />
-                                        </StackPanel>
-                                    </Button>
-
-                                    <TextBlock Margin="16"
-                             VerticalAlignment="Center"
-                             Foreground="{DynamicResource MaterialDesignBodyLight}"
-                             Text="Feel like you want to make a donation?  It would be gratefully received.  Click the button to donate via Open Collective."
-                             TextWrapping="Wrap" />
-                                </DockPanel>
-                            </Border>
-                        </Grid>
-                    </materialDesign:Card>
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="Welcome" Style="{StaticResource TitleText}" />
+                    <TextBlock Text="This is ICT Automated Operations System (AOS)" 
+                               Opacity="0.8" 
+                               Margin="20 30 20 30" 
+                               Style="{StaticResource NormalText}" />
+                    <!--<Button Content="Sign Up" Style="{StaticResource button}" />-->
                 </StackPanel>
             </Grid>
-        </ScrollViewer>
+        </Border>
 
-        <materialDesign:PopupBox Grid.Row="1"
-                             Margin="32"
-                             HorizontalAlignment="Right"
-                             VerticalAlignment="Bottom"
-                             Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}">
-            <StackPanel>
-                <Button 
-                Content="{materialDesign:PackIcon Kind=Github,
-                                                  Size=20}"
-                ToolTip="GitHub" />
+        <Border Background="#FFFFFF" Grid.Column="1" CornerRadius="0 10 10 0" >
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="Instructions" 
+                           Foreground="#623ed0" 
+                           Style="{StaticResource TitleText}" />
+                <StackPanel Orientation="Horizontal" Margin="0 20" HorizontalAlignment="Center">
+                    <Button Style="{StaticResource buttonCircle}">
+                        <Image Source="/Images/google.png" Width="20" Height="20" />
+                    </Button>
+                    <Button Style="{StaticResource buttonCircle}">
+                        <Image Source="/Images/facebook.png" Width="20" Height="20" />
+                    </Button>
+                    <Button Style="{StaticResource buttonCircle}">
+                        <Image Source="/Images/linkedin.png" Width="20" Height="20" />
+                    </Button>
+                </StackPanel>
 
-                <Button Background="{DynamicResource PrimaryHueMidBrush}"
-                
-                Content="{materialDesign:PackIcon Kind=Twitter,
-                                                  Size=20}"
-                Foreground="{DynamicResource PrimaryHueMidForegroundBrush}"
-                ToolTip="Twitter" />
+                <TextBlock Text="use your personnel number and password to login. 
+                            If you dont have an account, you need to create one, using your official email and a strong password.
+                            Note however, that your account will not active untill you have confirmed your email. If you have any difficulties performing
+                            any of these operations, please contact your supervisor of any of the programmers." 
+                            Margin="0 10 0 15" 
+                            Foreground="#878787" 
+                            TextAlignment="left"
+                            TextWrapping="Wrap"
+                            Width="450"
+                            Style="{StaticResource NormalText}" />
 
-                <Button 
-                Content="{materialDesign:PackIcon Kind=Message,
-                                                  Size=20}"
-                ToolTip="Chat">
-                    <!-- mix up the colours by bringing in a named palette (see merged dictionaries at top) -->
-                    <Button.Background>
-                        <SolidColorBrush Color="{StaticResource GreenPrimary500}" />
-                    </Button.Background>
+                <TextBlock Text="This system is used to effect corrections on our local systems as well as the online databases.
+                           
+                                 Note that only authorised users can perform these operations."
+                                Margin="0 10 0 15" 
+                                Foreground="#878787" 
+                                TextAlignment="left"
+                                TextWrapping="Wrap"
+                                Width="450"
+                                Style="{StaticResource NormalText}" />
 
-                    <Button.Foreground>
-                        <SolidColorBrush Color="{StaticResource GreenPrimary500Foreground}" />
-                    </Button.Foreground>
-                </Button>
 
-                <Button Background="{DynamicResource SecondaryHueMidBrush}"
-                
-                Content="{materialDesign:PackIcon Kind=Email,
-                                                  Size=20}"
-                Foreground="{DynamicResource SecondaryHueMidForegroundBrush}"
-                ToolTip="Email" />
-
-                <Button 
-                Content="{materialDesign:PackIcon Kind=Gift,
-                                                  Size=20}"
-                ToolTip="Feel like you want to make a donation?  It would be gratefully received.  Click the button to donate via Pledgie.">
-                    <Button.Background>
-                        <SolidColorBrush Color="{StaticResource GreenPrimary200}" />
-                    </Button.Background>
-
-                    <Button.Foreground>
-                        <SolidColorBrush Color="{StaticResource GreenPrimary200Foreground}" />
-                    </Button.Foreground>
-                </Button>
             </StackPanel>
-        </materialDesign:PopupBox>
+        </Border>
+
     </Grid>
 </UserControl>

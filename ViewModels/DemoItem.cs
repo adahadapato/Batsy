@@ -9,7 +9,7 @@ using Batsy.Infrastructures;
 
 namespace Batsy.ViewModels
 {
-    class DemoItem : ViewModelBase
+    class DemoItem : ObservableObject
     {
         private readonly Type _contentType;
         private readonly object? _dataContext;

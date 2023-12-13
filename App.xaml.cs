@@ -1,49 +1,50 @@
-﻿using MaterialDesignThemes.Wpf;
-using System.Configuration;
-using System.Data;
+﻿
+
+namespace Batsy;
+
+using Batsy.Infrastructures.DI;
+using Batsy.ViewModels;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using System.IO;
+using System.Text;
 using System.Windows;
-//using MaterialDesign.Shared;
 
-namespace Batsy
+
+/// <summary>
+/// Interaction logic for App.xaml
+/// </summary>
+public partial class App : Application
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public partial class App : Application
+    public IServiceProvider ServiceProvider { get; private set; }
+    public IConfiguration Configuration { get; private set; }
+    protected override void OnStartup(StartupEventArgs e)
     {
-        internal string? StartupPage { get; set; }
-        internal FlowDirection InitialFlowDirection { get; set; }
-        internal BaseTheme InitialTheme { get; set; }
+        var builder = new ConfigurationBuilder()
+             .SetBasePath(Directory.GetCurrentDirectory())
+             .AddJsonFile("appsettings.json", false, true);
 
-        protected override void OnStartup(StartupEventArgs e)
-        {
-           // (StartupPage, InitialFlowDirection, InitialTheme) = CommandLineOptions.ParseCommandLine(e.Args);
+        
 
-            //This is an alternate way to initialize MaterialDesignInXAML if you don't use the MaterialDesignResourceDictionary in App.xaml
-            //Color primaryColor = SwatchHelper.Lookup[MaterialDesignColor.DeepPurple];
-            //Color secondaryColor = SwatchHelper.Lookup[MaterialDesignColor.Lime];
-            //ITheme theme = Theme.Create(new MaterialDesignLightTheme(), primaryColor, secondaryColor);
-            //Resources.SetTheme(theme);
+        Configuration = builder.Build();
 
+        var serviceCollection = new ServiceCollection();
+        ConfigureServices(serviceCollection);
+        Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
-            //Illustration of setting culture info fully in WPF:
-            /*             
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("fr-FR");
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo("fr-FR");
-            FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement), new FrameworkPropertyMetadata(
-                        XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
-            */
-
-            //XamlDisplay.Init();
-
-            // test setup for Persian culture settings
-            /*System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("fa-Ir");
-            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("fa-Ir");
-            FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement), new FrameworkPropertyMetadata(
-                        System.Windows.Markup.XmlLanguage.GetLanguage(System.Globalization.CultureInfo.CurrentCulture.IetfLanguageTag)));*/
-
-            base.OnStartup(e);
-        }
+        ServiceProvider = serviceCollection.BuildServiceProvider();
+        var mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
+        mainWindow.Show();
+        //base.OnStartup(e);
     }
 
+    private void ConfigureServices(ServiceCollection serviceCollection)
+    {
+        serviceCollection.RegisterInfrastructureDependencies(Configuration);
+        serviceCollection.RegisterLogicDependencies();
+        serviceCollection.AddSingleton<MainWindow>(provider => new MainWindow
+        {
+            DataContext = provider.GetRequiredService<MainViewModel>()
+        }) ;
+    }
 }

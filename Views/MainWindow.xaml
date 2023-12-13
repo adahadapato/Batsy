@@ -4,7 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Batsy" 
-        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks" 
+        xmlns:vm="clr-namespace:Batsy.ViewModels" 
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
         Height="720" 
@@ -12,10 +13,16 @@
         WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent">
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" 
+                      ResizeBorderThickness="5"/>
+    </WindowChrome.WindowChrome>
+    
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis">
             
         </BooleanToVisibilityConverter>
+        
     </Window.Resources>
     <Border Background="#eff2f7"
             CornerRadius="30"
@@ -83,9 +90,17 @@
                         
                         <!-- Menu buttons -->
                         <StackPanel DockPanel.Dock="Top">
-                            <Button Style="{StaticResource menuButton}">
+                            <Button Style="{StaticResource menuButton}" 
+                                    Command="{Binding Path= (???)NavigateToHomeCommand}">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="HomeVariant"
+                                        Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Home"/>
+                                </StackPanel>
+                            </Button>
+                            <Button Style="{StaticResource menuButton}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Icon:PackIconMaterial Kind="ViewDashboard"
                                                            Style="{StaticResource menuButtonIcon}"/>
                                     <TextBlock Text="Dashbord"/>
                                 </StackPanel>
@@ -246,10 +261,10 @@
                    
                 </Grid>
 
-                <!-- Members datagrid -->
-                <DataGrid Grid.Row="5">
-                    
-                </DataGrid>
+                <!-- Content Views -->
+                <Grid Grid.Row="5">
+                    <ContentControl Content="{Binding Path = (???)Navigation.CurrentView}"/>
+                </Grid>
                 <!-- Pagination section -->
                 <Border Grid.Row="6"
                         HorizontalAlignment="Right"

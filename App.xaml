@@ -5,9 +5,18 @@
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:local="clr-namespace:Batsy" 
              xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
-             xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2"
-             StartupUri="MainWindow.xaml">
+             xmlns:vm="clr-namespace:Batsy.ViewModels"
+             xmlns:view="clr-namespace:Batsy.Views"
+             xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
     <Application.Resources>
+
+        <DataTemplate DataType="{x:Type TypeName =vm:HomeViewModel}">
+            <view:Home/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type TypeName =vm:LoginViewModel}">
+            <view:Login/>
+        </DataTemplate>
 
         <Style x:Key="imgClose" TargetType="Image">
             <Setter Property="Width" Value="30" />
@@ -94,6 +103,9 @@
             </Style.Triggers>
         </Style>
 
+
+        
+
         <Style x:Key="textHint" TargetType="TextBlock">
             <Setter Property="FontSize" Value="14" />
             <Setter Property="Grid.Column" Value="1" />
@@ -117,7 +129,7 @@
             <Setter Property="FontSize" Value="14" />
             <Setter Property="Margin" Value="0 20 0 0" />
             <Setter Property="Width" Value="200" />
-            <Setter Property="Background" Value="#3AB19B" />
+            <Setter Property="Background" Value="#623ed0" />
             <Setter Property="Foreground" Value="#FDFEFE" />
             <Setter Property="FocusVisualStyle" Value="{x:Null}" />
             <Setter Property="Template">
@@ -137,6 +149,28 @@
                 <Trigger Property="IsMouseCaptured" Value="True">
                     <Setter Property="Background" Value="#2d7a6c" />
                     <Setter Property="Foreground" Value="White" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
+        <Style x:Key="secondaryButton" TargetType="Button" BasedOn="{StaticResource mainButton}">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="#979797" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="7" BorderThickness="0.8" BorderBrush="#b9b9b9">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 0 0 1"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#d0d0d0" />
+                    <Setter Property="Foreground" Value="#ffffff" />
                 </Trigger>
             </Style.Triggers>
         </Style>
