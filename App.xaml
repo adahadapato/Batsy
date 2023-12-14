@@ -18,9 +18,18 @@
             <view:Login/>
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type TypeName =vm:DashbordViewModel}">
+            <view:Dashbord/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type TypeName =vm:CandidateViewModel}">
+            <view:Candidate/>
+        </DataTemplate>
+
         <Style x:Key="imgClose" TargetType="Image">
             <Setter Property="Width" Value="30" />
             <Setter Property="Height" Value="30" />
+            <Setter Property="Cursor" Value="Hand" />
             <Setter Property="VerticalAlignment" Value="Top" />
             <Setter Property="HorizontalAlignment" Value="Right" />
             <Setter Property="Margin" Value="0 13 13 0" />
@@ -58,6 +67,7 @@
             <Setter Property="Width" Value="170" />
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="Foreground" Value="#FDFEFE" />
+            <Setter Property="Cursor" Value="Hand" />
             <Setter Property="FocusVisualStyle" Value="{x:Null}" />
             <Setter Property="Template">
                 <Setter.Value>
@@ -83,6 +93,7 @@
         <Style x:Key="buttonCircle" TargetType="Button">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="Margin" Value="8 0" />
+            <Setter Property="Cursor" Value="Hand" />
             <Setter Property="FocusVisualStyle" Value="{x:Null}" />
             <Setter Property="Template">
                 <Setter.Value>
@@ -128,6 +139,7 @@
         <Style x:Key="mainButton" TargetType="{x:Type Button}">
             <Setter Property="FontSize" Value="14" />
             <Setter Property="Margin" Value="0 20 0 0" />
+            <Setter Property="Cursor" Value="Hand" />
             <Setter Property="Width" Value="200" />
             <Setter Property="Background" Value="#623ed0" />
             <Setter Property="Foreground" Value="#FDFEFE" />
@@ -135,8 +147,13 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Background="{TemplateBinding Background}" CornerRadius="25" BorderBrush="#49B7A3" Padding="15" BorderThickness="1">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="25" 
+                                BorderBrush="#054c0f" 
+                                Padding="15" 
+                                BorderThickness="1">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center" />
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -156,6 +173,7 @@
 
         <Style x:Key="secondaryButton" TargetType="Button" BasedOn="{StaticResource mainButton}">
             <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Cursor" Value="Hand" />
             <Setter Property="Foreground" Value="#979797" />
             <Setter Property="Template">
                 <Setter.Value>
@@ -178,6 +196,7 @@
         <Style x:Key="topButton" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="#6e7783"/>
+            <Setter Property="Cursor" Value="Hand" />
             <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
             <Setter Property="Width" Value="30"/>
             <Setter Property="Height" Value="30"/>
@@ -227,7 +246,16 @@
                     <Setter Property="Background" Value="#7b5cd6"/>
                     <Setter Property="Foreground" Value="#ffffff"/>
                 </Trigger>
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="Background" Value="#7b5cd6"/>
+                    <Setter Property="Foreground" Value="#ffffff"/>
+                </Trigger>
+                <!--<Trigger Property="IsFocused" Value="False">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="#d0c0ff"/>
+                </Trigger>-->
             </Style.Triggers>
+            
         </Style>
 
 
@@ -308,14 +336,18 @@
             <Setter Property="FocusVisualStyle" Value="{x:Null}" />
             <Setter Property="Height" Value="45" />
             <Setter Property="Width" Value="70" />
+            <Setter Property="Cursor" Value="Hand" />
             <Setter Property="BorderBrush" Value="Transparent" />
             <Setter Property="FontSize" Value="14" />
             <Setter Property="FontWeight" Value="SemiBold" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" BorderThickness="0 0 0 1" BorderBrush="{TemplateBinding BorderBrush}">
-                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Border Background="{TemplateBinding Background}" 
+                                BorderThickness="0 0 0 1" 
+                                BorderBrush="{TemplateBinding BorderBrush}">
+                            <ContentPresenter VerticalAlignment="Center" 
+                                              HorizontalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -323,6 +355,9 @@
 
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="#784FF2" />
+                </Trigger>
+                <Trigger Property="IsFocused" Value="True">
                     <Setter Property="BorderBrush" Value="#784FF2" />
                 </Trigger>
             </Style.Triggers>
@@ -734,7 +769,7 @@
             </Setter>
         </Style>
         <!--#endregion-->
-
+        
         <!--<ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="Blue" SecondaryColor="LightBlue" />

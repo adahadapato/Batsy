@@ -1,11 +1,11 @@
 ﻿
 
-namespace Batsy.ViewModels;
-
 using Batsy.Infrastructures;
 using Batsy.Resources.Interfaces;
 
-public class HomeViewModel : ViewModel
+namespace Batsy.ViewModels;
+
+public class CandidateViewModel:ViewModel
 {
     private INavigationService _navigation;
 
@@ -18,8 +18,9 @@ public class HomeViewModel : ViewModel
             OnPropertyChanged(nameof(Navigation));
         }
     }
+   
 
-    public HomeViewModel(INavigationService navServie)
+    public CandidateViewModel(INavigationService navServie)
     {
         _navigation = navServie;
     }
@@ -38,6 +39,4 @@ public class HomeViewModel : ViewModel
             return new RelayCommand(execute: o => { Navigation.NavigateTo<DashbordViewModel>(); }, canExecute: o => true);
         }
     }
-
-    
 }

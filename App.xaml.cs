@@ -16,8 +16,12 @@ using System.Windows;
 /// </summary>
 public partial class App : Application
 {
+    private static string _examYear;
+    private static string _examType;
     public IServiceProvider ServiceProvider { get; private set; }
     public IConfiguration Configuration { get; private set; }
+    
+
     protected override void OnStartup(StartupEventArgs e)
     {
         var builder = new ConfigurationBuilder()
@@ -35,16 +39,26 @@ public partial class App : Application
         ServiceProvider = serviceCollection.BuildServiceProvider();
         var mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
         mainWindow.Show();
-        //base.OnStartup(e);
+        base.OnStartup(e);
     }
 
     private void ConfigureServices(ServiceCollection serviceCollection)
     {
-        serviceCollection.RegisterInfrastructureDependencies(Configuration);
-        serviceCollection.RegisterLogicDependencies();
-        serviceCollection.AddSingleton<MainWindow>(provider => new MainWindow
+        serviceCollection.RegisterViewModels();
+        serviceCollection.RegisterServices(Configuration);
+        serviceCollection.AddSingleton(provider => new MainWindow
         {
             DataContext = provider.GetRequiredService<MainViewModel>()
         }) ;
+    }
+
+    public static string ExamYear
+    { 
+        get => _examYear; 
+        set => _examYear = value;
+    }
+    public static string ExamType { 
+        get => _examType; 
+        set => _examType = value; 
     }
 }

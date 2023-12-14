@@ -1,16 +1,57 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
-namespace Batsy.ViewModels
+using Batsy.Infrastructures;
+using Batsy.Resources.Interfaces;
+
+namespace Batsy.ViewModels;
+
+public class LoginViewModel : ViewModel
 {
-    public class LoginViewModel : ViewModel
+    public LoginViewModel(INavigationService navService)
     {
-        public LoginViewModel()
+        Navigation = navService;
+    }
+
+    private INavigationService _navigation;
+
+    public INavigationService Navigation
+    {
+        get => _navigation;
+        set
         {
-            
+            _navigation = value;
+            OnPropertyChanged(nameof(Navigation));
         }
+    }
+
+    private string _password;
+    private string _userName;
+    public string UserName
+    {
+        get => _userName;
+        set
+        {
+            _userName = value;
+            OnPropertyChanged(nameof(UserName));
+        }
+    }
+
+    public string Password
+    {
+        get => _password;
+        set
+        {
+            _password = value;
+            OnPropertyChanged(nameof(Password));
+        }
+    }
+
+    public RelayCommand CloseWindowCommand
+    {
+        get
+        {
+            return new RelayCommand(o=> { Navigation.NavigateTo<DashbordViewModel>(); }, o=> true);
+        }
+
     }
 }

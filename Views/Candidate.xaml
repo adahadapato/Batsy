@@ -6,114 +6,165 @@
              xmlns:local="clr-namespace:Batsy.Views" 
              xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks" 
              xmlns:uc="clr-namespace:Batsy.UserControls"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             Background="Transparent" 
              Width="800" 
              Height="500">
-    <Border CornerRadius="5" 
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Purple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Blue.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+    </UserControl.Resources>
+    <Border CornerRadius="10" 
             Background="#ffffff">
+
+
+
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="45"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="60"/>
             </Grid.RowDefinitions>
 
-            <!--App Title--><!--
-            <TextBlock Text="Design App" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="55 0 0 2" FontSize="16" FontWeight="SemiBold" Foreground="#4880FF"/>
-            <Icon:PackIconMaterial Kind="Message" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="33 0 0 4" Width="14" Height="14" Foreground="#FF9D00"/>
+            <Image Source="/Images/close.png" 
+                    Grid.Column="1" 
+                    Panel.ZIndex="1" 
+                    Style="{StaticResource imgClose}">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" 
+                                  Command="{Binding NavigateToDashbordCommand, Mode=OneTime}" />
+                </Image.InputBindings>
+            </Image>
+
+            <!--App Title-->
+            <TextBlock Text="Candidates correction" 
+                       HorizontalAlignment="Left" 
+                       VerticalAlignment="Center" 
+                       Margin="10 0 0 2" 
+                       FontSize="16" 
+                       Grid.Row="0"
+                       FontWeight="SemiBold" 
+                       Foreground="#378b3d"/>
+            <!--<Icon:PackIconMaterial Kind="Message" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="33 0 0 4" Width="14" Height="14" Foreground="#FF9D00"/>
             <Icon:PackIconMaterial Kind="Message" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30 4 0 0" Width="14" Height="14" Foreground="#4880FF"/>-->
-            <Border Grid.Row="1" Background="#F2F5F8" CornerRadius="0 0 0 5">
-                <Grid VerticalAlignment="Center" Margin="70 0 -60 0">
-                    <!--Background Layers-->
-                    <Border CornerRadius="7 0 0 0" Background="#F7F8FB" Height="50" Margin="40 -30 60 0" VerticalAlignment="Top"/>
-                    <Border CornerRadius="7 0 0 0" Background="#FDFDFD" Height="50" Margin="20 -15 60 0" VerticalAlignment="Top"/>
 
-                    <!--Main Layer-->
-                    <Border CornerRadius="7" Background="#ffffff" >
-                        <Border.Effect>
-                            <DropShadowEffect Direction="-130" BlurRadius="30" ShadowDepth="5" Opacity="0.1"/>
-                        </Border.Effect>
+            <Grid VerticalAlignment="Center" 
+                      Grid.Row="1"
+                      Margin="10">
 
-                        <Grid Margin="20 0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="auto"/>
-                            </Grid.RowDefinitions>
+                <!--Main Layer-->
 
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
 
-                            <!--Form Title-->
-                            <StackPanel Orientation="Horizontal" Margin="20 20 0 0">
-                                <Border CornerRadius="50" BorderThickness="1.5" BorderBrush="#EFEFEF">
-                                    <Ellipse Width="40" Height="40">
-                                        <Ellipse.Fill>
-                                            <ImageBrush ImageSource="/Images/q1.png"/>
-                                        </Ellipse.Fill>
-                                    </Ellipse>
-                                </Border>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="700"/>
+                </Grid.ColumnDefinitions>
 
-                                <TextBlock Text="Business Details" Foreground="#374655" FontSize="18" Margin="15 0 0 0" VerticalAlignment="Center"/>
-                            </StackPanel>
 
-                            <!--Form Percentage-->
-                            <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right" Margin="0 20 20 0">
-                                <Border Width="30" Height="30" CornerRadius="50" BorderThickness="3" ClipToBounds="True">
-                                    <Border.BorderBrush>
-                                        <LinearGradientBrush>
-                                            <GradientStop Color="#4880FF" Offset="0"/>
-                                            <GradientStop Color="#EFEFEF" Offset="0.4"/>
-                                        </LinearGradientBrush>
-                                    </Border.BorderBrush>
-                                </Border>
 
-                                <StackPanel Margin="10 0 0 0" VerticalAlignment="Center">
-                                    <TextBlock Text="10%" Foreground="#4880FF" FontSize="14" FontWeight="SemiBold" />
-                                    <TextBlock Text="Profile Completion" Foreground="#97A5B4" Margin="0 2 0 0"/>
-                                </StackPanel>
-                            </StackPanel>
 
-                            <Separator Grid.Row="1" Grid.ColumnSpan="2" 
-                                       Height="0.7" 
-                                       Margin="-20 20 -20 20" 
-                                       Background="#E1E6EB"/>
 
-                            <!--Inputs-->
-                            <uc:MyTextBox Grid.Column="0" Grid.Row="2" Caption="Legal Name of Business" Hint="Enter your legal name"/>
-                            <uc:MyTextBox Grid.Column="0" Grid.Row="3" Caption="Notification Email" Hint="Enter your email"/>
-                            <uc:MyTextBox Grid.Column="0" Grid.Row="4" Caption="Phone" Hint="Enter your phone"/>
-                            <uc:MyTextBox Grid.Column="0" Grid.Row="5" Caption="Address (Line 1)" Hint="Enter your address"/>
-                            <uc:MyTextBox Grid.Column="1" Grid.Row="2" Caption="Business Name" Hint="Enter your business name"/>
-                            <uc:MyTextBox Grid.Column="1" Grid.Row="3" Caption="Account Email" Hint="Enter your email"/>
-                            <uc:MyTextBox Grid.Column="1" Grid.Row="4" Caption="Currency" Hint="Enter your currnecy"/>
-                            <uc:MyTextBox Grid.Column="1" Grid.Row="5" Caption="Address (Line 2)" Hint="Enter your address"/>
+                <!--Inputs-->
+                <TextBox Grid.Column="0"
+                         Grid.Row="0"
+                         materialDesign:HintAssist.Hint="Registration Number"
+                         materialDesign:HintAssist.Foreground="Green"
+                         materialDesign:TextFieldAssist.UnderlineBrush="Green"
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                         Margin="0,0,10,0"/>
 
-                            <!--Form Bottom Background-->
-                            <Border Grid.Row="6" Grid.ColumnSpan="2" Height="80" Background="#f6f6f6" CornerRadius="0 0 10 10" Margin="-20 40 -20 0"/>
+                <TextBox Grid.Column="0"
+                        Grid.Row="1"
+                         materialDesign:HintAssist.Hint="Certificate Number"
+                        materialDesign:HintAssist.Foreground="Green"
+                        materialDesign:TextFieldAssist.UnderlineBrush="Green"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                         Margin="0,0,10,0"/>
 
-                            <!--Main Button-->
-                            <Button Grid.Column="1" Grid.Row="6" 
-                                    Content="Save Next" 
-                                    HorizontalAlignment="Right" 
-                                    Margin="0 40 20 0" Style="{StaticResource mainButton}">
-                                <Button.Effect>
-                                    <DropShadowEffect Direction="-120" BlurRadius="10" Opacity="0.3" ShadowDepth="5" Color="#4880FF"/>
-                                </Button.Effect>
-                            </Button>
+                <TextBox Grid.Column="0"
+                         Grid.Row="2"
+                         materialDesign:HintAssist.Hint="School Number"
+                         materialDesign:HintAssist.Foreground="Green"
+                         materialDesign:TextFieldAssist.UnderlineBrush="Green"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                         Margin="0,0,10,0"/>
 
-                            <!--Secondary Button-->
-                            <Button Grid.Row="6" Content="Back" 
-                                    HorizontalAlignment="Left" Margin="20 40 0 0" Style="{StaticResource secondaryButton}" Width="150"/>
+                <TextBox Grid.Column="1"
+                        Grid.Row="0"
+                        materialDesign:HintAssist.Hint="Candidate Name"
+                        materialDesign:HintAssist.Foreground="Green"
+                        materialDesign:TextFieldAssist.UnderlineBrush="Green"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                        Margin="10,0,230,0"/>
 
-                        </Grid>
-                    </Border>
-                </Grid>
-            </Border>
+                <TextBox Grid.Column="1"
+                        Grid.Row="1"
+                        materialDesign:HintAssist.Hint="Date of Birth"
+                        materialDesign:HintAssist.Foreground="Green"
+                        materialDesign:TextFieldAssist.UnderlineBrush="Green"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                        Margin="10,0,500,0"/>
+
+                <TextBox Grid.Column="1"
+                          Grid.Row="1"
+                        materialDesign:HintAssist.Hint="Sex"
+                        materialDesign:HintAssist.Foreground="Green"
+                        materialDesign:TextFieldAssist.UnderlineBrush="Green"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                        Margin="261,0,249,0"/>
+
+                <TextBox Grid.Column="1"
+                         Grid.Row="2"
+                        materialDesign:HintAssist.Hint="State of Origin"
+                        materialDesign:HintAssist.Foreground="Green"
+                        materialDesign:TextFieldAssist.UnderlineBrush="Green"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10,0,230,0" 
+                        />
+
+            </Grid>
+            <!--Form Bottom Background-->
+            <Grid Grid.Row="2" 
+                    Grid.ColumnSpan="2">
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#623ed0" Offset="0" />
+                        <GradientStop Color="#3AADA1" Offset="1" />
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            Margin="15 2 15 2">
+                    <!--Main Button-->
+                    <Button Content="Save" 
+                            Width="150"
+                            Margin="0 2 5 2"
+                            Style="{StaticResource mainButton}"/>
+
+
+
+                    <!--Secondary Button-->
+                    <Button Content="Clear" 
+                            Style="{StaticResource button}" 
+                            Margin="0 2 5 2"
+                            Width="150"/>
+                </StackPanel>
+                
+
+            </Grid>
         </Grid>
     </Border>
 </UserControl>

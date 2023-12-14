@@ -36,6 +36,9 @@ public class ObservableObject : INotifyPropertyChanged
     /// Notifies listeners that a property value has changed.
     /// </summary>
     /// <param name="propertyName">Name of the property, used to notify listeners.</param>
-    protected void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-        => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+        
 }

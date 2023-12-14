@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Batsy.Views
 {
     /// <summary>
-    /// Interaction logic for Transitions.xaml
+    /// Interaction logic for Dashbord.xaml
     /// </summary>
-    public partial class Transitions : UserControl
+    public partial class Dashbord : UserControl
     {
-        public Transitions()
+        public Dashbord()
         {
             InitializeComponent();
         }
