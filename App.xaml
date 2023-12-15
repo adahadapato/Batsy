@@ -9,7 +9,7 @@
              xmlns:view="clr-namespace:Batsy.Views"
              xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
     <Application.Resources>
-
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
         <DataTemplate DataType="{x:Type TypeName =vm:HomeViewModel}">
             <view:Home/>
         </DataTemplate>
@@ -24,6 +24,9 @@
 
         <DataTemplate DataType="{x:Type TypeName =vm:CandidateViewModel}">
             <view:Candidate/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type TypeName =vm:CandidateListViewModel}">
+            <view:CandidateList/>
         </DataTemplate>
 
         <Style x:Key="imgClose" TargetType="Image">
@@ -40,7 +43,7 @@
                             <ScaleTransform ScaleX="1.1" ScaleY="1.1"/>
                         </Setter.Value>
                     </Setter>
-                </Trigger>
+                 </Trigger>
             </Style.Triggers>
         </Style>
 

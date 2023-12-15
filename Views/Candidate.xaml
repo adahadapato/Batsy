@@ -22,9 +22,7 @@
 
     </UserControl.Resources>
     <Border CornerRadius="10" 
-            Background="#ffffff">
-
-
+            Background="#3AADA1">
 
         <Grid>
             <Grid.RowDefinitions>
@@ -32,139 +30,196 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="60"/>
             </Grid.RowDefinitions>
+            <Grid Background="Transparent"
+                  Grid.Column="0">
+                <Image Source="/Images/close.png" 
+                       Panel.ZIndex="1" 
+                        Style="{StaticResource imgClose}">
+                    <Image.InputBindings>
+                        <MouseBinding Gesture="LeftClick" 
+                            Command="{Binding NavigateToDashbordCommand, Mode=OneTime}" />
+                    </Image.InputBindings>
+                </Image>
 
-            <Image Source="/Images/close.png" 
-                    Grid.Column="1" 
-                    Panel.ZIndex="1" 
-                    Style="{StaticResource imgClose}">
-                <Image.InputBindings>
-                    <MouseBinding Gesture="LeftClick" 
-                                  Command="{Binding NavigateToDashbordCommand, Mode=OneTime}" />
-                </Image.InputBindings>
-            </Image>
+                <!--App Title-->
+                <TextBlock Text="Candidates correction" 
+                            HorizontalAlignment="Left" 
+                            VerticalAlignment="Center" 
+                            Margin="10 0 0 2" 
+                            FontSize="16" 
+                            FontWeight="SemiBold" 
+                            Foreground="#fff"/>
+            </Grid>
 
-            <!--App Title-->
-            <TextBlock Text="Candidates correction" 
-                       HorizontalAlignment="Left" 
-                       VerticalAlignment="Center" 
-                       Margin="10 0 0 2" 
-                       FontSize="16" 
-                       Grid.Row="0"
-                       FontWeight="SemiBold" 
-                       Foreground="#378b3d"/>
             <!--<Icon:PackIconMaterial Kind="Message" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="33 0 0 4" Width="14" Height="14" Foreground="#FF9D00"/>
             <Icon:PackIconMaterial Kind="Message" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30 4 0 0" Width="14" Height="14" Foreground="#4880FF"/>-->
 
             <Grid VerticalAlignment="Center" 
-                      Grid.Row="1"
-                      Margin="10">
-
+                  Grid.Row="1"
+                  Margin="10,0,10,0"
+                  Background="#ffffff" 
+                  Height="384">
                 <!--Main Layer-->
+                <Grid  HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Width="760">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="50"/>
-                </Grid.RowDefinitions>
+                    </Grid.RowDefinitions>
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="300"/>
-                    <ColumnDefinition Width="700"/>
-                </Grid.ColumnDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300"/>
+                        <ColumnDefinition Width="700"/>
+                    </Grid.ColumnDefinitions>
 
 
 
 
 
-                <!--Inputs-->
-                <TextBox Grid.Column="0"
-                         Grid.Row="0"
-                         materialDesign:HintAssist.Hint="Registration Number"
-                         materialDesign:HintAssist.Foreground="Green"
-                         materialDesign:TextFieldAssist.UnderlineBrush="Green"
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                         Margin="0,0,10,0"/>
+                    <!--Inputs-->
+                    <TextBox Grid.Column="0"
+                             Padding="5"
+                             Grid.Row="0"
+                             materialDesign:HintAssist.Hint="Registration Number"
+                             materialDesign:HintAssist.Foreground="Green"
+                             materialDesign:TextFieldAssist.UnderlineBrush="Green"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                             Width="290"
+                             VerticalAlignment="Center"
+                             HorizontalAlignment="Center"/>
 
-                <TextBox Grid.Column="0"
-                        Grid.Row="1"
-                         materialDesign:HintAssist.Hint="Certificate Number"
-                        materialDesign:HintAssist.Foreground="Green"
-                        materialDesign:TextFieldAssist.UnderlineBrush="Green"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                         Margin="0,0,10,0"/>
+                    <TextBox Grid.Column="0"
+                             Grid.Row="1"
+                             materialDesign:HintAssist.Hint="Certificate Number"
+                             materialDesign:HintAssist.Foreground="Green"
+                             materialDesign:TextFieldAssist.UnderlineBrush="Green"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             Padding="5"
+                             Width="290"
+                             VerticalAlignment="Center"
+                             HorizontalAlignment="Center"/>
 
-                <TextBox Grid.Column="0"
-                         Grid.Row="2"
-                         materialDesign:HintAssist.Hint="School Number"
-                         materialDesign:HintAssist.Foreground="Green"
-                         materialDesign:TextFieldAssist.UnderlineBrush="Green"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                         Margin="0,0,10,0"/>
+                    <TextBox
+                             Grid.Row="2"
+                            materialDesign:HintAssist.Hint="School Number"
+                            materialDesign:HintAssist.Foreground="Green"
+                            materialDesign:TextFieldAssist.UnderlineBrush="Green"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            Padding="5" 
+                            Width="290" 
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"/>
 
-                <TextBox Grid.Column="1"
-                        Grid.Row="0"
-                        materialDesign:HintAssist.Hint="Candidate Name"
-                        materialDesign:HintAssist.Foreground="Green"
-                        materialDesign:TextFieldAssist.UnderlineBrush="Green"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                        Margin="10,0,230,0"/>
+                    <TextBox Grid.Column="1"
+                             Grid.Row="0"
+                             materialDesign:HintAssist.Hint="Candidate Name"
+                             materialDesign:HintAssist.Foreground="Green"
+                             materialDesign:TextFieldAssist.UnderlineBrush="Green"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                             Padding="5" 
+                             Width="455"
+                             VerticalAlignment="Center"
+                             HorizontalAlignment="Left"/>
 
-                <TextBox Grid.Column="1"
-                        Grid.Row="1"
-                        materialDesign:HintAssist.Hint="Date of Birth"
-                        materialDesign:HintAssist.Foreground="Green"
-                        materialDesign:TextFieldAssist.UnderlineBrush="Green"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                        Margin="10,0,500,0"/>
+                    <TextBox Grid.Column="1"
+                             Grid.Row="1"
+                             materialDesign:HintAssist.Hint="Date of Birth"
+                             materialDesign:HintAssist.Foreground="Green"
+                             materialDesign:TextFieldAssist.UnderlineBrush="Green"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                             Padding="5" 
+                             Width="230"
+                             VerticalAlignment="Center"
+                             HorizontalAlignment="Left"/>
 
-                <TextBox Grid.Column="1"
-                          Grid.Row="1"
-                        materialDesign:HintAssist.Hint="Sex"
-                        materialDesign:HintAssist.Foreground="Green"
-                        materialDesign:TextFieldAssist.UnderlineBrush="Green"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                        Margin="261,0,249,0"/>
+                    <ComboBox Grid.Column="1"
+                              Grid.Row="1"
+                              materialDesign:HintAssist.Hint="Sex"
+                              materialDesign:HintAssist.Foreground="Green"
+                              materialDesign:TextFieldAssist.UnderlineBrush="Green"
+                              Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
+                              Width="210"
+                              Padding="2" 
+                              Height="40" 
+                              VerticalAlignment="Center"
+                              HorizontalAlignment="Center"/>
 
-                <TextBox Grid.Column="1"
-                         Grid.Row="2"
-                        materialDesign:HintAssist.Hint="State of Origin"
-                        materialDesign:HintAssist.Foreground="Green"
-                        materialDesign:TextFieldAssist.UnderlineBrush="Green"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10,0,230,0" 
-                        />
+                    <ComboBox
+                             Grid.Row="2"
+                        Grid.Column="1"
+                             materialDesign:HintAssist.Hint="State of Origin"
+                             materialDesign:HintAssist.Foreground="Green"
+                             materialDesign:TextFieldAssist.UnderlineBrush="Green"
+                             Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
+                             Padding="2"
+                        HorizontalAlignment="Left"
+                        Width="290" 
+                        Height="40"/>
+
+                    <Separator Grid.ColumnSpan="2"
+                               Grid.Row="4" 
+                               Width="755"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Left"
+                               Background="#3D3B3B"/>
+
+                    <TextBox IsEnabled="False"
+                             IsReadOnly="True"
+                             FontWeight="Bold"
+                             Grid.Row="5"
+                             materialDesign:HintAssist.Hint="School Name"
+                             materialDesign:HintAssist.Foreground="Green"
+                             materialDesign:TextFieldAssist.UnderlineBrush="Green"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                             Padding="5" 
+                             Height="50"
+                             Width="755" 
+                             Grid.ColumnSpan="2" 
+                             VerticalAlignment="Bottom"
+                             HorizontalAlignment="Left"/>
+
+                </Grid>
+
+
+
 
             </Grid>
+            <!-- End of Main layer-->
+
             <!--Form Bottom Background-->
-            <Grid Grid.Row="2" 
+            <Border CornerRadius="0 0 10 10"
+                    Grid.Row="2"
                     Grid.ColumnSpan="2">
-                <Grid.Background>
+                <Border.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                         <GradientStop Color="#623ed0" Offset="0" />
                         <GradientStop Color="#3AADA1" Offset="1" />
                     </LinearGradientBrush>
-                </Grid.Background>
-                <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Right"
-                            Margin="15 2 15 2">
-                    <!--Main Button-->
-                    <Button Content="Save" 
-                            Width="150"
-                            Margin="0 2 5 2"
-                            Style="{StaticResource mainButton}"/>
+                </Border.Background>
+                <Grid>
+                    <StackPanel Orientation="Horizontal"
+                               HorizontalAlignment="Right"
+                               Margin="15 2 15 2">
+                        <!--Main Button-->
+                        <Button Content="Save" 
+                                        Width="150"
+                                        Margin="0 2 5 2"
+                                        Style="{StaticResource mainButton}"/>
 
+                        <!--Secondary Button-->
+                        <Button Content="Clear" 
+                                        Style="{StaticResource button}" 
+                                        Margin="0 2 5 2"
+                                        Width="150"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
 
-
-                    <!--Secondary Button-->
-                    <Button Content="Clear" 
-                            Style="{StaticResource button}" 
-                            Margin="0 2 5 2"
-                            Width="150"/>
-                </StackPanel>
-                
-
-            </Grid>
         </Grid>
     </Border>
 </UserControl>

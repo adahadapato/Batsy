@@ -58,6 +58,13 @@ namespace Batsy.ViewModels
             }
         }
 
+        public RelayCommand NavigateToCandidateListCommand
+        {
+            get
+            {
+                return new RelayCommand(execute: o => { Navigation.NavigateTo<CandidateListViewModel>(); }, canExecute: o => true);
+            }
+        }
         public RelayCommand CloseApplicationCommand
         {
             get

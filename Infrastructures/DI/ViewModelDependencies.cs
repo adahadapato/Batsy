@@ -15,7 +15,9 @@ public static class ViewModelDependencies
         services.AddSingleton<HomeViewModel>();
         services.AddSingleton<LoginViewModel>();
         services.AddSingleton<CandidateViewModel>();
+        services.AddSingleton<CandidateListViewModel>();
         services.AddSingleton<DashbordViewModel>();
+
 
         services.AddSingleton<Func<Type, ViewModel>>(servireProvider => 
                                 viewmodelType => 
