@@ -3,10 +3,12 @@
 namespace Batsy;
 
 using Batsy.Infrastructures.DI;
+using Batsy.Resources.Services;
 using Batsy.ViewModels;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.IO;
+using System.Net.Http;
 using System.Text;
 using System.Windows;
 
@@ -50,6 +52,18 @@ public partial class App : Application
         {
             DataContext = provider.GetRequiredService<MainViewModel>()
         }) ;
+
+        serviceCollection.AddHttpClient<CandidateService>((httpClient) =>
+        {
+            httpClient.BaseAddress = new Uri("http://10.0.1.31:9300/api/");
+        })
+          .ConfigurePrimaryHttpMessageHandler(() =>
+           {
+                return new SocketsHttpHandler
+                {
+                    PooledConnectionLifetime = TimeSpan.FromMinutes(5),
+                };
+            }).SetHandlerLifetime(Timeout.InfiniteTimeSpan);
     }
 
     public static string ExamYear

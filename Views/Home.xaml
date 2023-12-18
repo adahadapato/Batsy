@@ -53,7 +53,7 @@
         <Border Background="#FFFFFF" Grid.Column="1" CornerRadius="0 10 10 0" >
             <StackPanel VerticalAlignment="Center">
                 <TextBlock Text="Instructions" 
-                           Foreground="#623ed0" 
+                           Foreground="#035B1F" 
                            Style="{StaticResource TitleText}" />
                 <StackPanel Orientation="Horizontal" Margin="0 20" HorizontalAlignment="Center">
                     <Button Style="{StaticResource buttonCircle}">

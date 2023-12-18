@@ -86,7 +86,7 @@
                            Width="15"
                            Height="15"/>
                 </Button>
-                <Border Grid.Row="1" Background="#623ed0"
+                    <Border Grid.Row="1" Background="#035B1F"
                         CornerRadius="0 50 0 0">
                    <!-- Menu logo -->
                     <DockPanel >
@@ -115,7 +115,7 @@
                                    Margin="5 25 0 10"/>
 
                             <TextBlock Text="{Binding Path=PersonnelNumber}" 
-                                    Foreground="#d0bfff"
+                                    Foreground="#8AFAAE"
                                     FontSize="14"
                                     FontWeight="SemiBold"
                                     DockPanel.Dock="Top"
@@ -124,7 +124,7 @@
                         <Separator DockPanel.Dock="Top"
                                    Margin="25"
                                    Height="0.8"
-                                   Background="#7e5fdc"/>
+                                   Background="#0BA43C"/>
                         
                         <!-- Menu buttons -->
                         <StackPanel DockPanel.Dock="Top">
@@ -244,7 +244,7 @@
                            FontSize="32"
                            Margin="0 20 0 0"
                            HorizontalAlignment="Left"
-                           Foreground="#121518"/>
+                           Foreground="#035B1F"/>
                 
                 <!-- Add Button-->
                 
@@ -283,7 +283,7 @@
                     <!-- Seperator -->
                 <Separator Height="1"
                            Grid.Row="3"
-                           Background="#dae2ae"
+                           Background="#0BA43C"
                            Margin="0 -1 0 10"/>
                 
                 <!-- Tab buttons -->
@@ -396,7 +396,7 @@
             </Grid>
             
         </Grid>
-            <Border Grid.Row="5" Background="#623ed0"
+            <Border Grid.Row="5" Background="#035B1F"
                     CornerRadius="0 0 30 30">
                 <Grid x:Name="GridFooter" 
                         Grid.Row="5"

@@ -207,8 +207,7 @@ namespace Batsy.ViewModels
             }
 
 
-            var exam = e as string;
-            App.ExamType = (exam.ToLower().Contains("int") || exam.ToLower().Contains("ext")) ? exam.Substring(0,3) : exam.Trim();
+            GetExamType(e);
 
             if (Convert.ToInt32(App.ExamYear) < 2002  && App.ExamType.ToLower().Contains("ext"))
             {
@@ -216,8 +215,45 @@ namespace Batsy.ViewModels
                 return Task.CompletedTask;
             }
 
-            ExamsDetails = (exam.ToLower().Contains("int") || exam.ToLower().Contains("ext")) ? $"SSCE{App.ExamType}{Year}" : $"{App.ExamType}{Year}";
+            GetExamDetails(e);
             return Task.CompletedTask;
+        }
+
+        private void GetExamType(object e)
+        {
+            var exam = e as string;
+            if (exam == null) 
+            {
+                App.ExamType = string.Empty;
+            }
+
+            App.ExamType =  exam.Trim();
+
+            if (exam.ToLower().Contains("int") || exam.ToLower().Contains("ext"))
+            {
+                var _exam = exam.AsSpan()[..3];
+                App.ExamType = _exam.ToString();
+            }
+        }
+
+        private void GetExamDetails(object e)
+        {
+            var exam = e as string;
+            if (exam == null)
+            {
+                ExamsDetails = string.Empty;
+            }
+
+            //App.ExamType = exam.Trim();
+            //ExamsDetails = (exam.ToLower().Contains("int") || exam.ToLower().Contains("ext")) ? $"SSCE{App.ExamType}{Year}" : $"{App.ExamType}{Year}";
+            if (exam.ToLower().Contains("int") || exam.ToLower().Contains("ext"))
+            {
+                ExamsDetails = $"SSCE{App.ExamType}{Year}";
+            }
+            else
+            {
+                ExamsDetails = $"{App.ExamType}{Year}";
+            }
         }
     }
 }

@@ -6,7 +6,8 @@ using Batsy.Resources.Interfaces;
 using Batsy.Resources.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
+using System.ComponentModel.Design;
+using System.Net.Http;
 
 public static class ServiceDependencies
 {
@@ -17,5 +18,9 @@ public static class ServiceDependencies
         //    options.UseSqlServer(configuration.GetConnectionString("SimpleTodoApp")));
         //services.AddScoped<ITodoRepository, TodoRepository>();
         services.AddSingleton<INavigationService, NavigationService>();
+        services.AddSingleton(typeof(CandidateService));
+
+
+       
     }
 }
