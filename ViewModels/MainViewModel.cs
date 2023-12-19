@@ -16,6 +16,8 @@ using Batsy.Infrastructures;
 using Batsy.Views;
 using Batsy.Resources.Interfaces;
 using System.Windows;
+using System.Windows.Media.Imaging;
+using System.Windows.Media;
 
 namespace Batsy.ViewModels
 {
@@ -108,6 +110,7 @@ namespace Batsy.ViewModels
             PersonnelNumber = "P 2020";
             Operations = "Awaitinng Input";
             IsFocused= true;
+           
         }
         private string _fullName = string.Empty;
         public string FullName
@@ -164,6 +167,16 @@ namespace Batsy.ViewModels
                 SetProperty(ref _examsDetails, value);
                 OnPropertyChanged(nameof(ExamsDetails));
                 //App.ExamYear = _year;
+            }
+        }
+        private ImageSource _Picture;
+        public ImageSource Picture
+        {
+            get=> _Picture ;
+            set
+            {
+                SetProperty(ref _Picture, value);
+                OnPropertyChanged(nameof(Picture));
             }
         }
 

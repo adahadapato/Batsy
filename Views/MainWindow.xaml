@@ -98,9 +98,9 @@
                                 DockPanel.Dock="Top"
                                 HorizontalAlignment="Left"
                                 Margin="20 -30 0 0">
-                            <Ellipse>
+                                <Ellipse>
                                 <Ellipse.Fill>
-                                    <ImageBrush ImageSource="/Images/picture.jpg"/>
+                                    <ImageBrush ImageSource="{Binding Path=Picture}"/>
                                 </Ellipse.Fill>
                             </Ellipse>
                             

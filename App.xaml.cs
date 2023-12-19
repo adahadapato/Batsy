@@ -20,6 +20,7 @@ public partial class App : Application
 {
     private static string _examYear;
     private static string _examType;
+    private static string _accessToken;
     public IServiceProvider ServiceProvider { get; private set; }
     public IConfiguration Configuration { get; private set; }
     
@@ -48,22 +49,26 @@ public partial class App : Application
     {
         serviceCollection.RegisterViewModels();
         serviceCollection.RegisterServices(Configuration);
+
+       
+
         serviceCollection.AddSingleton(provider => new MainWindow
         {
             DataContext = provider.GetRequiredService<MainViewModel>()
         }) ;
 
-        serviceCollection.AddHttpClient<CandidateService>((httpClient) =>
+        serviceCollection.AddHttpClient<Resources.Interfaces.IResourceService, ResourceService>((httpClient) =>
         {
             httpClient.BaseAddress = new Uri("http://10.0.1.31:9300/api/");
         })
-          .ConfigurePrimaryHttpMessageHandler(() =>
-           {
-                return new SocketsHttpHandler
-                {
-                    PooledConnectionLifetime = TimeSpan.FromMinutes(5),
-                };
-            }).SetHandlerLifetime(Timeout.InfiniteTimeSpan);
+      .ConfigurePrimaryHttpMessageHandler(() =>
+      {
+          return new SocketsHttpHandler
+          {
+              PooledConnectionLifetime = TimeSpan.FromMinutes(5),
+          };
+      }).SetHandlerLifetime(Timeout.InfiniteTimeSpan);
+
     }
 
     public static string ExamYear
@@ -74,5 +79,11 @@ public partial class App : Application
     public static string ExamType { 
         get => _examType; 
         set => _examType = value; 
+    }
+
+    public static string AccessToken
+    {
+        get => _accessToken;
+        set => _accessToken = value;
     }
 }

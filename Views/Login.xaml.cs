@@ -36,6 +36,9 @@ namespace Batsy.Views
                 textPassword.Visibility = Visibility.Collapsed;
             else
                 textPassword.Visibility = Visibility.Visible;
+
+            if (this.DataContext != null)
+            { ((dynamic)this.DataContext).Password = ((PasswordBox)sender).Password; }
         }
 
         private void textPassword_MouseDown(object sender, MouseButtonEventArgs e)

@@ -1,0 +1,60 @@
+﻿
+using System.IO;
+using System.Net.Http.Headers;
+using System.Windows.Media.Imaging;
+using static System.Net.Mime.MediaTypeNames;
+
+namespace Batsy.Models;
+
+public class StaffObject
+{
+    public string PersonnelNo { get; set; }
+    public string FirstName { get; set; }
+    public string MiddleName { get; set; }
+    public string LastName { get; set; }
+    public string Division { get; set; }
+    public string Passport { get; set; }
+    public override string ToString()
+    {
+        return $"{LastName.Trim()} {FirstName.Trim()}";
+    }
+
+    //public Image ToImage()
+    //{
+    //    if (PersonnelNo == null)
+    //    {
+    //        return null;
+    //    }
+
+    //    byte[] _bytes = Convert.FromBase64String(Passport);
+    //    Image _image;
+    //    using (MemoryStream ms = new MemoryStream(_bytes))
+    //    {
+    //        _image = Image.FromStream(ms);
+    //    }
+    //}
+
+    public BitmapImage ToBitmap()
+    {
+        byte[] byteBuffer = Convert.FromBase64String(Passport);
+        BitmapImage bitmapImage = new BitmapImage();
+        MemoryStream memoryStream = new(byteBuffer)
+        {
+            Position = 0
+        };
+        //BitmapImage bitmapImage = new()
+        //{
+        //    StreamSource = memoryStream
+        //};
+        //memoryStream.Close();
+
+        
+        //MemoryStream ms = new MemoryStream(byteBuffer);
+        bitmapImage.BeginInit();
+        bitmapImage.StreamSource = memoryStream;
+        bitmapImage.EndInit();
+
+        return bitmapImage;
+    }
+
+}

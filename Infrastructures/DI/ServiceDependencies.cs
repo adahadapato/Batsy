@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System.ComponentModel.Design;
 using System.Net.Http;
 
+
 public static class ServiceDependencies
 {
     public static void RegisterServices(this IServiceCollection services,
@@ -19,7 +20,9 @@ public static class ServiceDependencies
         //services.AddScoped<ITodoRepository, TodoRepository>();
         services.AddSingleton<INavigationService, NavigationService>();
         services.AddSingleton(typeof(CandidateService));
-
+        services.AddSingleton(typeof(CandidateService));
+        services.AddScoped<Resources.Interfaces.IResourceService, ResourceService>();  
+        services.AddScoped<ITokenContainer, TokenContainer>();
 
        
     }

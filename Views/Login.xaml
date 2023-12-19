@@ -76,8 +76,12 @@
                         </Grid.ColumnDefinitions>
 
                         <Image Source="/Images/Email.png" Height="20" />
-                        <TextBlock x:Name="textEmail" MouseDown="textEmail_MouseDown" Text="Email" Style="{StaticResource textHint}" />
-                        <TextBox Name="txtEmail" TextChanged="txtEmail_TextChanged" Style="{StaticResource textBox}" />
+                        <TextBlock x:Name="textEmail" MouseDown="textEmail_MouseDown" 
+                                   Text="Email/Staff No." Style="{StaticResource textHint}" />
+                        <TextBox Name="txtEmail" 
+                                 Text="{Binding Path=UserName}"
+                                 TextChanged="txtEmail_TextChanged" 
+                                 Style="{StaticResource textBox}" />
                     </Grid>
                 </Border>
 
@@ -94,7 +98,8 @@
                     </Grid>
                 </Border>
 
-                <Button Content="Sign In" Click="Button_Click" Style="{StaticResource mainButton}" />
+                <Button Content="Sign In" Command="{Binding Path=LoginCommand}" 
+                        Style="{StaticResource mainButton}" />
             </StackPanel>
         </Border>
 
