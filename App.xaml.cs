@@ -18,9 +18,7 @@ using System.Windows;
 /// </summary>
 public partial class App : Application
 {
-    private static string _examYear;
-    private static string _examType;
-    private static string _accessToken;
+   
     public IServiceProvider ServiceProvider { get; private set; }
     public IConfiguration Configuration { get; private set; }
     
@@ -31,7 +29,7 @@ public partial class App : Application
              .SetBasePath(Directory.GetCurrentDirectory())
              .AddJsonFile("appsettings.json", false, true);
 
-        
+       
 
         Configuration = builder.Build();
 
@@ -71,19 +69,5 @@ public partial class App : Application
 
     }
 
-    public static string ExamYear
-    { 
-        get => _examYear; 
-        set => _examYear = value;
-    }
-    public static string ExamType { 
-        get => _examType; 
-        set => _examType = value; 
-    }
-
-    public static string AccessToken
-    {
-        get => _accessToken;
-        set => _accessToken = value;
-    }
+   
 }

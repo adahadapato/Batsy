@@ -173,16 +173,34 @@
 
                             </StackPanel>
 
-                        <Button Style="{StaticResource menuButton}"
-                               VerticalAlignment="Bottom" 
-                                DockPanel.Dock="Bottom"
-                                Margin="15 0 15 20">
+                            <Button Style="{StaticResource menuButton}"
+                                    VerticalAlignment="Bottom" 
+                                    DockPanel.Dock="Bottom"
+                                    Margin="15 0 15 20"
+                                    Command="{Binding Path=NavigateToLoginCommand}"
+                                    Visibility="{Binding Path=ShowLogIn, 
+                                    Converter={StaticResource BoolToVis}, Mode=TwoWay}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Icon:PackIconMaterial Kind="Login"
+                               Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Login"/>
+                                </StackPanel>
+                            </Button>
+                        
+                            <Button Style="{StaticResource menuButton}"
+                                    VerticalAlignment="Bottom" 
+                                    DockPanel.Dock="Bottom"
+                                    Margin="15 0 15 20"
+                                    Command="{Binding Path=LogoutCommand}"
+                                    Visibility="{Binding Path=ShowLogOut, 
+                                    Converter={StaticResource BoolToVis}, Mode=TwoWay}">
                             <StackPanel Orientation="Horizontal">
                                 <Icon:PackIconMaterial Kind="Logout"
                                                        Style="{StaticResource menuButtonIcon}"/>
                                 <TextBlock Text="Logout"/>
                             </StackPanel>
                         </Button>
+                        
 
                     </DockPanel>
                     
@@ -422,7 +440,12 @@
                         <StatusBarItem Grid.Column="2">
                             <TextBlock Text="{Binding ExamsDetails, Mode=OneWay}" />
                         </StatusBarItem>
+
                         <StatusBarItem Grid.Column="3">
+                            <TextBlock Text="{Binding Examination, Mode=OneWay}" />
+                        </StatusBarItem>
+
+                        <StatusBarItem Grid.Column="4">
                             <TextBlock Text="{Binding Year, Mode=OneWay}" />
                         </StatusBarItem>
                     </StatusBar>

@@ -13,7 +13,7 @@ public class LoginViewModel : ViewModel
     private readonly IResourceService _resourceService;
     private INavigationService _navigation;
     private readonly ITokenContainer _tokenContainer;
-
+    private readonly RegistryService _registryService;
 
 
     public INavigationService Navigation
@@ -69,12 +69,14 @@ public class LoginViewModel : ViewModel
     public LoginViewModel(INavigationService navService, 
                          IResourceService resourceService,
                          MainViewModel mainViewModel,
-                         ITokenContainer tokenContainer)
+                         ITokenContainer tokenContainer,
+                         RegistryService registryService)
     {
         Navigation = navService;
         _resourceService = resourceService;
         _mainViewModel = mainViewModel;
         _tokenContainer = tokenContainer;
+        _registryService = registryService;
     }
 
     private async Task Login()
@@ -109,8 +111,15 @@ public class LoginViewModel : ViewModel
             MessageBox.Show(_msg,"Get Staff details", MessageBoxButton.OK, MessageBoxImage.Error);
             return;
         }
-        _mainViewModel.FullName = _staff.ToString();
-        _mainViewModel.PersonnelNumber = _staff.PersonnelNo;
+        _registryService.FullName= _staff.ShortName();
+        _mainViewModel.FullName = _registryService.FullName;
+        _registryService.PersonnelNo = _staff.PersonnelNo;
+        _mainViewModel.PersonnelNumber = _registryService.PersonnelNo;
         _mainViewModel.Picture = _staff.ToBitmap();
+        _registryService.LogOut = false;
+        _mainViewModel.ShowLogIn = _registryService.LogOut;
+        _mainViewModel.ShowLogOut = !_registryService.LogOut;
+        Navigation.NavigateTo<DashbordViewModel>();
+        
     }
 }

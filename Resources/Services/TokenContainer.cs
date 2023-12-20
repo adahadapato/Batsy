@@ -5,11 +5,18 @@ namespace Batsy.Resources.Services
 {
     public class TokenContainer : ITokenContainer
     {
+        private readonly RegistryService _registryService;
+        public TokenContainer(RegistryService registryService)
+        {
+
+            _registryService = registryService;
+
+        }
         public string GetToken()
         {
             try
             {
-                return App.AccessToken;
+                return _registryService.ApiToken;
 
             }catch (Exception ex)
             {
@@ -27,7 +34,7 @@ namespace Batsy.Resources.Services
         {
             try
             {
-                App.AccessToken = token;
+                _registryService.ApiToken = token;
             }catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Set token", MessageBoxButton.OK, MessageBoxImage.Error);

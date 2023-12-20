@@ -14,26 +14,15 @@ public class StaffObject
     public string LastName { get; set; }
     public string Division { get; set; }
     public string Passport { get; set; }
-    public override string ToString()
+    public string FullName()
     {
         return $"{LastName.Trim()} {FirstName.Trim()}";
     }
 
-    //public Image ToImage()
-    //{
-    //    if (PersonnelNo == null)
-    //    {
-    //        return null;
-    //    }
-
-    //    byte[] _bytes = Convert.FromBase64String(Passport);
-    //    Image _image;
-    //    using (MemoryStream ms = new MemoryStream(_bytes))
-    //    {
-    //        _image = Image.FromStream(ms);
-    //    }
-    //}
-
+    public string ShortName()
+    {
+        return $"{LastName.Trim()} {FirstName.AsSpan()[0..1]}{MiddleName.AsSpan()[0..1]}";
+    }
     public BitmapImage ToBitmap()
     {
         byte[] byteBuffer = Convert.FromBase64String(Passport);
@@ -42,14 +31,7 @@ public class StaffObject
         {
             Position = 0
         };
-        //BitmapImage bitmapImage = new()
-        //{
-        //    StreamSource = memoryStream
-        //};
-        //memoryStream.Close();
-
-        
-        //MemoryStream ms = new MemoryStream(byteBuffer);
+       
         bitmapImage.BeginInit();
         bitmapImage.StreamSource = memoryStream;
         bitmapImage.EndInit();

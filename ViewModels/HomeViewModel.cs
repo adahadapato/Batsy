@@ -4,11 +4,12 @@ namespace Batsy.ViewModels;
 
 using Batsy.Infrastructures;
 using Batsy.Resources.Interfaces;
+using Batsy.Resources.Services;
 
 public class HomeViewModel : ViewModel
 {
     private INavigationService _navigation;
-
+    private RegistryService _registryService;
     public INavigationService Navigation
     {
         get => _navigation;
@@ -19,9 +20,11 @@ public class HomeViewModel : ViewModel
         }
     }
 
-    public HomeViewModel(INavigationService navServie)
+    public HomeViewModel(INavigationService navServie,
+                         RegistryService registryService)
     {
         _navigation = navServie;
+        _registryService = registryService;
     }
     public RelayCommand NavigateToLoginCommand
     {
@@ -39,5 +42,13 @@ public class HomeViewModel : ViewModel
         }
     }
 
-    
+    public RelayCommand CloseWindowCommand
+    {
+        get
+        {
+            return new RelayCommand(o => { Navigation.NavigateTo<DashbordViewModel>(); }, o => true);
+        }
+
+    }
+
 }

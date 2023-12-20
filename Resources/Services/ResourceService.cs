@@ -40,12 +40,12 @@ namespace Batsy.Resources.Services
                 if (!response.IsSuccessStatusCode) return (false, response.StatusCode.ToString(), null);
                 string result = await response.Content.ReadAsStringAsync();
 
-                if (result == null) return (false, "", null);
+                if (result == null) return (false, "An error uccored trying to log in", null);
 
                 var _response = JsonConvert.DeserializeObject<ApiResponse>(result);
 
-                if (_response == null) return (false, "", null);
-                if (!_response.IsSuccessful) return (false, "", null);
+                if (_response == null) return (false, "Unable to login at this time", null);
+                if (!_response.IsSuccessful) return (false, _response.ErrorMessages.FirstOrDefault(), null);
 
                 IList collection = (IList)_response.Result;
 

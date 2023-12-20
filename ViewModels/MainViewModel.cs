@@ -18,12 +18,14 @@ using Batsy.Resources.Interfaces;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
+using Batsy.Resources.Services;
 
 namespace Batsy.ViewModels
 {
     public class MainViewModel : ViewModel
     {
         private INavigationService _navigation;
+        private readonly RegistryService _registryService;
         public INavigationService Navigation
         {
             get => _navigation;
@@ -60,6 +62,15 @@ namespace Batsy.ViewModels
             }
         }
 
+        public RelayCommand NavigateToLoginCommand
+        {
+            get
+            {
+                return new RelayCommand(execute: o => { Navigation.NavigateTo<LoginViewModel>(); }, canExecute: o => true);
+            }
+        }
+
+
         public RelayCommand NavigateToCandidateListCommand
         {
             get
@@ -76,6 +87,15 @@ namespace Batsy.ViewModels
 
         }
 
+        public RelayCommand LogoutCommand
+        {
+            get
+            {
+                return new RelayCommand(o => LogOut());
+            }
+
+        }
+
         public RelayCommand<object> ExamsTypeCommand
         {
             get
@@ -84,15 +104,7 @@ namespace Batsy.ViewModels
             }
         }
 
-        //public RelayCommand<object> ExamsTypeCommand
-        //{
-        //    get
-        //    {
-        //        return new RelayCommand<object>(async (object e) => await SetExamsTypeAsync(e));
-        //    }
-        //}
-
-
+       
         private bool _isFocused;
         public bool IsFocused
         {
@@ -103,14 +115,14 @@ namespace Batsy.ViewModels
                 OnPropertyChanged(nameof(IsFocused));
             }
         }
-        public MainViewModel(INavigationService navService)
+        public MainViewModel(INavigationService navService,
+                             RegistryService registryService)
         {
             Navigation = navService;
-            FullName = "Adahada ET";
-            PersonnelNumber = "P 2020";
-            Operations = "Awaitinng Input";
-            IsFocused= true;
-           
+            _registryService = registryService;
+            Initialize();
+            Reset();
+            
         }
         private string _fullName = string.Empty;
         public string FullName
@@ -153,7 +165,7 @@ namespace Batsy.ViewModels
             {
                 SetProperty(ref _year, value);
                 OnPropertyChanged(nameof(Year));
-                App.ExamYear = _year;
+                _registryService.ExamYear = _year;
             }
         }
 
@@ -169,6 +181,45 @@ namespace Batsy.ViewModels
                 //App.ExamYear = _year;
             }
         }
+
+
+        private string _examination = string.Empty;
+        public string Examination
+        {
+            get => _examination;
+            set
+            {
+                SetProperty(ref _examination, value);
+                OnPropertyChanged(nameof(Examination));
+                _registryService.Examination = _examination;
+            }
+        }
+
+
+        private bool _showLogin;
+        public bool ShowLogIn
+        {
+            get => _showLogin;
+            set
+            {
+                SetProperty(ref _showLogin, value);
+                OnPropertyChanged(nameof(ShowLogIn));
+               
+            }
+        }
+
+        private bool _showLogOut;
+        public bool ShowLogOut
+        {
+            get => _showLogOut;
+            set
+            {
+                SetProperty(ref _showLogOut, value);
+                OnPropertyChanged(nameof(ShowLogOut));
+               
+            }
+        }
+
         private ImageSource _Picture;
         public ImageSource Picture
         {
@@ -186,11 +237,7 @@ namespace Batsy.ViewModels
             return Task.CompletedTask;
         }
 
-        //public Task SetExamsYearAsync()
-        //{
-        //    Application.Current.Shutdown();
-        //    return Task.CompletedTask;
-        //}
+      
 
         public Task SetExamsTypeAsync(object e)
         {
@@ -199,30 +246,30 @@ namespace Batsy.ViewModels
                 MessageBox.Show("Invalid exams type");
                 return Task.CompletedTask;
             }
-            if (string.IsNullOrWhiteSpace(App.ExamYear) || App.ExamYear.Length < 4)
+            if (string.IsNullOrWhiteSpace(_registryService.ExamYear) || _registryService.ExamYear.Length < 4)
             {
                 MessageBox.Show("Please provide the examination year");
                 return Task.CompletedTask;
             }
 
             var _today = DateTime.Today.Year;
-            if (Convert.ToInt32(App.ExamYear) > _today)
+            if (Convert.ToInt32(_registryService.ExamYear) > _today)
             {
                 MessageBox.Show("The examination year provided is greater the current year");
                 return Task.CompletedTask;
             }
 
             
-            if (string.IsNullOrWhiteSpace(App.ExamYear) || App.ExamYear.Length < 4)
+            if (string.IsNullOrWhiteSpace(_registryService.ExamYear) || _registryService.ExamYear.Length < 4)
             {
                 MessageBox.Show("Examination year must ne 4 digit long: 2020");
                 return Task.CompletedTask;
             }
 
-
+            Examination = e as string;
             GetExamType(e);
 
-            if (Convert.ToInt32(App.ExamYear) < 2002  && App.ExamType.ToLower().Contains("ext"))
+            if (Convert.ToInt32(_registryService.ExamYear) < 2002  && _registryService.ExamType.ToLower().Contains("ext"))
             {
                 MessageBox.Show("The examination year provided is not valid for SSCE External");
                 return Task.CompletedTask;
@@ -237,15 +284,15 @@ namespace Batsy.ViewModels
             var exam = e as string;
             if (exam == null) 
             {
-                App.ExamType = string.Empty;
+                _registryService.ExamType = string.Empty;
             }
 
-            App.ExamType =  exam.Trim();
+            _registryService.ExamType =  exam.Trim();
 
             if (exam.ToLower().Contains("int") || exam.ToLower().Contains("ext"))
             {
                 var _exam = exam.AsSpan()[..3];
-                App.ExamType = _exam.ToString();
+                _registryService.ExamType = _exam.ToString();
             }
         }
 
@@ -254,18 +301,55 @@ namespace Batsy.ViewModels
             var exam = e as string;
             if (exam == null)
             {
-                ExamsDetails = string.Empty;
+                _registryService.ExamsDetails = string.Empty;
             }
-
-            //App.ExamType = exam.Trim();
-            //ExamsDetails = (exam.ToLower().Contains("int") || exam.ToLower().Contains("ext")) ? $"SSCE{App.ExamType}{Year}" : $"{App.ExamType}{Year}";
             if (exam.ToLower().Contains("int") || exam.ToLower().Contains("ext"))
             {
-                ExamsDetails = $"SSCE{App.ExamType}{Year}";
+              _registryService.ExamsDetails = $"SSCE{_registryService.ExamType}{_registryService.ExamYear}";
             }
             else
             {
-                ExamsDetails = $"{App.ExamType}{Year}";
+                _registryService.ExamsDetails = $"{_registryService.ExamType}{_registryService.ExamYear}";
+            }
+
+            ExamsDetails = _registryService.ExamsDetails;
+        }
+
+        private void LogOut()
+        {
+            if(MessageBox.Show("Do you want to log out now","Logout",MessageBoxButton.YesNo, MessageBoxImage.Question) is MessageBoxResult.No)
+            {
+                return;
+            }
+
+            _registryService.LogOut = true;
+            _registryService.PersonnelNo = "0000";
+            _registryService.FullName = "Not logged in";
+            _registryService.ApiToken = "";
+            Reset();
+            ShowLogOut = _registryService.LogOut;
+            ShowLogIn = !_registryService.LogOut;
+            Picture = null;
+        }
+
+        private void Reset()
+        {
+            FullName = _registryService.FullName;
+            PersonnelNumber = _registryService.PersonnelNo;
+            Operations = "Awaitinng Input";
+            IsFocused = true;
+            //ShowLogIn = true;
+        }
+
+        private void Initialize()
+        {
+            Year = _registryService.ExamYear;
+            Examination = _registryService.Examination;
+            ExamsDetails = _registryService.ExamsDetails;
+            ShowLogIn = _registryService.LogOut;
+            if (_registryService.FirstStart)
+            {
+                _registryService.LogOut = true;
             }
         }
     }

@@ -21,6 +21,7 @@ public static class ServiceDependencies
         services.AddSingleton<INavigationService, NavigationService>();
         services.AddSingleton(typeof(CandidateService));
         services.AddSingleton(typeof(CandidateService));
+        services.AddScoped(typeof(RegistryService));
         services.AddScoped<Resources.Interfaces.IResourceService, ResourceService>();  
         services.AddScoped<ITokenContainer, TokenContainer>();
 
