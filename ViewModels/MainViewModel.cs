@@ -24,8 +24,11 @@ namespace Batsy.ViewModels
 {
     public class MainViewModel : ViewModel
     {
-        private INavigationService _navigation;
+       
         private readonly RegistryService _registryService;
+
+        #region class properties
+        private INavigationService _navigation;
         public INavigationService Navigation
         {
             get => _navigation;
@@ -36,7 +39,127 @@ namespace Batsy.ViewModels
             }
         }
 
+        private bool _isFocused;
+        public bool IsFocused
+        {
+            get => _isFocused;
+            set
+            {
+                SetProperty(ref _isFocused, value);
+                OnPropertyChanged(nameof(IsFocused));
+            }
+        }
        
+        private string _fullName = string.Empty;
+        public string FullName
+        {
+            get => _fullName;
+            set
+            {
+                SetProperty(ref _fullName, value);
+                OnPropertyChanged(nameof(FullName));
+            }
+        }
+
+        private string _personnelNumber = string.Empty;
+        public string PersonnelNumber
+        {
+            get => _personnelNumber;
+            set
+            {
+                SetProperty(ref _personnelNumber, value);
+                OnPropertyChanged(nameof(PersonnelNumber));
+            }
+        }
+
+        private string _operations = string.Empty;
+        public string Operations
+        {
+            get => _operations;
+            set
+            {
+                SetProperty(ref _operations, value);
+                OnPropertyChanged(nameof(Operations));
+            }
+        }
+
+        private string _year = string.Empty;
+        public string Year
+        {
+            get => _year;
+            set
+            {
+                SetProperty(ref _year, value);
+                OnPropertyChanged(nameof(Year));
+                _registryService.ExamYear = _year;
+            }
+        }
+
+
+        private string _examsDetails = string.Empty;
+        public string ExamsDetails
+        {
+            get => _examsDetails;
+            set
+            {
+                SetProperty(ref _examsDetails, value);
+                OnPropertyChanged(nameof(ExamsDetails));
+                //App.ExamYear = _year;
+            }
+        }
+
+
+        private string _examination = string.Empty;
+        public string Examination
+        {
+            get => _examination;
+            set
+            {
+                SetProperty(ref _examination, value);
+                OnPropertyChanged(nameof(Examination));
+                _registryService.Examination = _examination;
+            }
+        }
+
+
+        private bool _showLogin;
+        public bool ShowLogIn
+        {
+            get => _showLogin;
+            set
+            {
+                SetProperty(ref _showLogin, value);
+                OnPropertyChanged(nameof(ShowLogIn));
+
+            }
+        }
+
+        private bool _showLogOut;
+        public bool ShowLogOut
+        {
+            get => _showLogOut;
+            set
+            {
+                SetProperty(ref _showLogOut, value);
+                OnPropertyChanged(nameof(ShowLogOut));
+
+            }
+        }
+
+        private ImageSource _Picture;
+        public ImageSource Picture
+        {
+            get => _Picture;
+            set
+            {
+                SetProperty(ref _Picture, value);
+                OnPropertyChanged(nameof(Picture));
+            }
+        }
+        #endregion
+
+        #region command objects
+
         public RelayCommand NavigateToHomeCommand
         {
             get
@@ -103,142 +226,28 @@ namespace Batsy.ViewModels
                 return new RelayCommand<object>(async(object e) =>  await SetExamsTypeAsync(e) );
             }
         }
+        #endregion
 
-       
-        private bool _isFocused;
-        public bool IsFocused
-        {
-            get => _isFocused;
-            set
-            {
-                SetProperty(ref _isFocused, value);
-                OnPropertyChanged(nameof(IsFocused));
-            }
-        }
+        #region class constructor
         public MainViewModel(INavigationService navService,
-                             RegistryService registryService)
+                            RegistryService registryService)
         {
             Navigation = navService;
             _registryService = registryService;
             Initialize();
             Reset();
-            
+
         }
-        private string _fullName = string.Empty;
-        public string FullName
-        {
-            get => _fullName;
-            set
-            {
-                SetProperty(ref _fullName, value);
-                OnPropertyChanged(nameof(FullName));
-            }
-        }
+        #endregion
 
-        private string _personnelNumber = string.Empty;
-        public string PersonnelNumber
-        {
-            get => _personnelNumber;
-            set
-            {
-               SetProperty(ref _personnelNumber, value);
-               OnPropertyChanged(nameof(PersonnelNumber));
-            }
-        }
-
-        private string _operations = string.Empty;
-        public string Operations
-        {
-            get => _operations;
-            set
-            {
-                SetProperty(ref _operations, value);
-                OnPropertyChanged(nameof(Operations));
-            }
-        }
-
-        private string _year = string.Empty;
-        public string Year
-        {
-            get => _year;
-            set
-            {
-                SetProperty(ref _year, value);
-                OnPropertyChanged(nameof(Year));
-                _registryService.ExamYear = _year;
-            }
-        }
-
-
-        private string _examsDetails = string.Empty;
-        public string ExamsDetails
-        {
-            get => _examsDetails;
-            set
-            {
-                SetProperty(ref _examsDetails, value);
-                OnPropertyChanged(nameof(ExamsDetails));
-                //App.ExamYear = _year;
-            }
-        }
-
-
-        private string _examination = string.Empty;
-        public string Examination
-        {
-            get => _examination;
-            set
-            {
-                SetProperty(ref _examination, value);
-                OnPropertyChanged(nameof(Examination));
-                _registryService.Examination = _examination;
-            }
-        }
-
-
-        private bool _showLogin;
-        public bool ShowLogIn
-        {
-            get => _showLogin;
-            set
-            {
-                SetProperty(ref _showLogin, value);
-                OnPropertyChanged(nameof(ShowLogIn));
-               
-            }
-        }
-
-        private bool _showLogOut;
-        public bool ShowLogOut
-        {
-            get => _showLogOut;
-            set
-            {
-                SetProperty(ref _showLogOut, value);
-                OnPropertyChanged(nameof(ShowLogOut));
-               
-            }
-        }
-
-        private ImageSource _Picture;
-        public ImageSource Picture
-        {
-            get=> _Picture ;
-            set
-            {
-                SetProperty(ref _Picture, value);
-                OnPropertyChanged(nameof(Picture));
-            }
-        }
-
+        #region helper methods
         public Task SutdownAsync()
         {
             Application.Current.Shutdown();
             return Task.CompletedTask;
         }
 
-      
-
+  
         public Task SetExamsTypeAsync(object e)
         {
             if(e is null)
@@ -352,5 +361,6 @@ namespace Batsy.ViewModels
                 _registryService.LogOut = true;
             }
         }
+        #endregion
     }
 }
